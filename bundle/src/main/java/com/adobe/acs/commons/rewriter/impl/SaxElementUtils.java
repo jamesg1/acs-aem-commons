@@ -30,6 +30,7 @@ public class SaxElementUtils {
 
     public static final String CSS_TYPE = "text/css";
     public static final String JS_TYPE = "text/javascript";
+    public static final String JS_MODULE_TYPE = "module";
     
     public static boolean isCss(final String elementName, final Attributes attrs) {
         final String type = attrs.getValue("", "type");
@@ -51,7 +52,7 @@ public class SaxElementUtils {
         final String src = attrs.getValue("", "src");
 
         if (StringUtils.equals("script", elementName)
-                && StringUtils.equals(type, JS_TYPE)
+                && (StringUtils.equals(type, JS_TYPE) || StringUtils.equals(type, JS_MODULE_TYPE))
                 && StringUtils.startsWith(src, "/")
                 && !StringUtils.startsWith(src, "//")
                 && StringUtils.endsWith(src, LibraryType.JS.extension)) {
